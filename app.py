@@ -1,5 +1,5 @@
 #flask app which displays all courses and which student enrolled in which course.
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,redirect
 import mysql.connector
 
 app = Flask(__name__)
