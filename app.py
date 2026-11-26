@@ -29,5 +29,15 @@ def index():
 
     return render_template('index.html', courses=courses, students=students)
 
+@app.post('/courses')
+def add_course():
+    title = request.form['title']
+    db = get_db_connection()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("INSERT INTO courses (title) VALUES (%s)", (title,))
+    db.commit()
+    db.close()
+    return redirect('/')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
