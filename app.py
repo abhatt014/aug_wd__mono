@@ -38,6 +38,15 @@ def add_course():
     db.commit()
     db.close()
     return redirect('/')
-
+@app.post('/students')
+def add_student():
+    name = request.form['name']
+    course_id = request.form['course_id']
+    db = get_db_connection()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("INSERT INTO students (name, course_id) VALUES (%s, %s)", (name, course_id))
+    db.commit()
+    db.close()
+    return redirect('/')
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
